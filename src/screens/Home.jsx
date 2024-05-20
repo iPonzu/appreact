@@ -1,9 +1,10 @@
 import '../components/css/_global.css'
+import _header from '../components/_header'
 
 export default function Home(){
     return(
         <>
-            <h1 className='text-black'>do: homepage</h1>
+            <_header />
         </>
     )
 }
