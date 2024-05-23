@@ -14,7 +14,25 @@ export default function AppNavigation(){
                 <Route path="/home" element={<Home />} />
                 <Route path="/cadastro" element={<Cadastro />}/>
                 <Route path="/recuperarsenha" element={<RecuperarSenha />}/>
+                <Route path="*" element={<NotFound />}></Route>
             </Routes>
         </BrowserRouter>
+    )
+}
+
+function NotFound(){
+    return(
+    <>
+        <h1>404 | Not Found</h1>
+        <style>
+            {`
+                h1{
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #000000
+                }
+            `}
+        </style>
+    </>
     )
 }

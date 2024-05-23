@@ -1,7 +1,6 @@
 import { Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import '../components/css/_global.css'
 import { useState } from "react";
 
 export default function RecuperarSenha(){
@@ -9,18 +8,26 @@ export default function RecuperarSenha(){
     const navigate = useNavigate()
 
     const recuperarSenha = async () => {
-        try {
-            const auth = getAuth()
-            await sendPasswordResetEmail(auth, email)
-            navigate('/')
-        } catch (error) {
-            alert(`Email não existente ${error}`)
-        }
+        
+        const auth = getAuth()
+        sendPasswordResetEmail(auth, email)
+        .then(() => {
+            console.log('Email enviado')
+            window.localStorage.setItem('emailforSignIn', email)
+        })  
+        .catch((error) => {
+            alert(`email não existente ${error}`)
+        })
     }
+    
     return(
         <>
             <main className='form-signin w-100 d-flex justify-content-center align-items-center vh-100'>
-                <form onSubmit={recuperarSenha}>
+                <form onSubmit={(event) =>{
+                    event.preventDefault()
+                    recuperarSenha()
+                    navigate('/')
+                }}>
                     <h3 className='mb-3 text-white w-60'>
                         Recuperar senha
                         <Image
@@ -37,14 +44,18 @@ export default function RecuperarSenha(){
                             style={{
                                 backgroundColor: 'grey',
                                 color: 'black'
-                            }} 
+                            }}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <label htmlFor='floatingInput'>Email</label>
                     </div>
                     <button 
                         type='submit' 
                         className='btn btn-success mt-2'
-                        onClick={recuperarSenha}
+                        onClick={() => {
+                            recuperarSenha(navigate('/'))
+                            alert('Email enviado')
+                        }}
                     >
                         Enviar
                     </button>

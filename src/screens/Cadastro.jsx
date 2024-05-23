@@ -4,7 +4,6 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Image } from 'react-bootstrap'
-import '../components/css/_global.css'
 
 export default function Cadastro(){
     const [email, setEmail] = useState('')
@@ -83,7 +82,7 @@ export default function Cadastro(){
                     <button 
                         type='submit'
                         className='btn btn-success mt-2'
-                        onClick={cadastro}
+                        onClick={() => cadastro(navigate('/'))}
                     >
                         Cadastrar
                     </button>
