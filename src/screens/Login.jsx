@@ -4,6 +4,8 @@ import { Image } from 'react-bootstrap'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import auth from '../firebase/_login'
 import '../components/css/_global.css'
+import _footer from '../components/_footer'
+import _header from '../components/_header'
 
 export default function Login(){
     const [email, setEmail] = useState('')
@@ -83,6 +85,7 @@ export default function Login(){
                     </div>       
                 </form>
             </main>
+            <_footer />
         </>
     )
 }
